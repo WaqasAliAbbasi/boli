@@ -1,0 +1,15 @@
+syntax = "proto3";
+package boli;
+
+service Translate {
+    rpc TranslateText (Translation) returns (TranslationRecorded);
+}
+
+message Translation {
+    string source_language = 1;
+    string destination_language = 2;
+    string source_text = 3;
+    string destination_text = 4;
+}
+
+message TranslationRecorded {}

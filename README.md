@@ -11,7 +11,7 @@ sudo apt-get install protobuf-compiler
 ### Launch Server
 
 ```bash
-cargo run --bin helloworld-server 
+cargo run --bin boli-server 
 ```
 
 ## UI

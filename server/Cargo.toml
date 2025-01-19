@@ -3,9 +3,9 @@ name = "boli-server"
 version = "0.1.0"
 edition = "2021"
 
-[[bin]] # Bin to run the HelloWorld gRPC server
-name = "helloworld-server"
-path = "src/server.rs"
+[[bin]]
+name = "boli-server"
+path = "src/main.rs"
 
 [dependencies]
 tonic = "*"
