@@ -21,10 +21,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap();
 
     let translation_service = service::TranslaterService::default();
+    let translation_service = TranslateServer::new(translation_service);
+    let translation_service = tonic_web::enable(translation_service);
 
     Server::builder()
+        .accept_http1(true)
         .add_service(reflection_service)
-        .add_service(TranslateServer::new(translation_service))
+        .add_service(translation_service)
         .serve(addr)
         .await?;
 
