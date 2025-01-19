@@ -1,8 +1,10 @@
 syntax = "proto3";
+import "google/protobuf/empty.proto";
 package boli;
 
 service Translate {
     rpc TranslateText (Translation) returns (TranslationRecorded);
+    rpc GetTranslations (google.protobuf.Empty) returns (Translations);
 }
 
 message Translation {
@@ -13,3 +15,7 @@ message Translation {
 }
 
 message TranslationRecorded {}
+
+message Translations {
+    repeated Translation translations = 1;
+}

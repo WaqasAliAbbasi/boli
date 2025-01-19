@@ -1,3 +1,6 @@
+mod db;
+mod models;
+mod schema;
 mod service;
 
 use boli::translate_server::TranslateServer;
