@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
+import { Navigation } from "./_components/Navigation";
 
 export const metadata: Metadata = {
-  title: "Boli Web App",
+  title: "Boli",
   description: "A web app for Boli",
 };
 
@@ -12,8 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={"antialiased"}>{children}</body>
+    <html lang="en" className="h-full">
+      <body className={"h=full"}>
+        <div className="min-h-full">
+          <Navigation />
+          <div className="py-10">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }

@@ -19,19 +19,26 @@ export interface Translation {
   destinationText: string;
 }
 
-export interface TranslationRecorded {
-}
+export interface TranslationRecorded {}
 
 export interface Translations {
   translations: Translation[];
 }
 
 function createBaseTranslation(): Translation {
-  return { sourceLanguage: "", destinationLanguage: "", sourceText: "", destinationText: "" };
+  return {
+    sourceLanguage: "",
+    destinationLanguage: "",
+    sourceText: "",
+    destinationText: "",
+  };
 }
 
 export const Translation: MessageFns<Translation> = {
-  encode(message: Translation, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Translation,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sourceLanguage !== "") {
       writer.uint32(10).string(message.sourceLanguage);
     }
@@ -48,7 +55,8 @@ export const Translation: MessageFns<Translation> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Translation {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTranslation();
     while (reader.pos < end) {
@@ -97,10 +105,18 @@ export const Translation: MessageFns<Translation> = {
 
   fromJSON(object: any): Translation {
     return {
-      sourceLanguage: isSet(object.sourceLanguage) ? globalThis.String(object.sourceLanguage) : "",
-      destinationLanguage: isSet(object.destinationLanguage) ? globalThis.String(object.destinationLanguage) : "",
-      sourceText: isSet(object.sourceText) ? globalThis.String(object.sourceText) : "",
-      destinationText: isSet(object.destinationText) ? globalThis.String(object.destinationText) : "",
+      sourceLanguage: isSet(object.sourceLanguage)
+        ? globalThis.String(object.sourceLanguage)
+        : "",
+      destinationLanguage: isSet(object.destinationLanguage)
+        ? globalThis.String(object.destinationLanguage)
+        : "",
+      sourceText: isSet(object.sourceText)
+        ? globalThis.String(object.sourceText)
+        : "",
+      destinationText: isSet(object.destinationText)
+        ? globalThis.String(object.destinationText)
+        : "",
     };
   },
 
@@ -124,7 +140,9 @@ export const Translation: MessageFns<Translation> = {
   create<I extends Exact<DeepPartial<Translation>, I>>(base?: I): Translation {
     return Translation.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Translation>, I>>(object: I): Translation {
+  fromPartial<I extends Exact<DeepPartial<Translation>, I>>(
+    object: I,
+  ): Translation {
     const message = createBaseTranslation();
     message.sourceLanguage = object.sourceLanguage ?? "";
     message.destinationLanguage = object.destinationLanguage ?? "";
@@ -139,12 +157,19 @@ function createBaseTranslationRecorded(): TranslationRecorded {
 }
 
 export const TranslationRecorded: MessageFns<TranslationRecorded> = {
-  encode(_: TranslationRecorded, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: TranslationRecorded,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TranslationRecorded {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TranslationRecorded {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTranslationRecorded();
     while (reader.pos < end) {
@@ -168,10 +193,14 @@ export const TranslationRecorded: MessageFns<TranslationRecorded> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TranslationRecorded>, I>>(base?: I): TranslationRecorded {
+  create<I extends Exact<DeepPartial<TranslationRecorded>, I>>(
+    base?: I,
+  ): TranslationRecorded {
     return TranslationRecorded.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TranslationRecorded>, I>>(_: I): TranslationRecorded {
+  fromPartial<I extends Exact<DeepPartial<TranslationRecorded>, I>>(
+    _: I,
+  ): TranslationRecorded {
     const message = createBaseTranslationRecorded();
     return message;
   },
@@ -182,7 +211,10 @@ function createBaseTranslations(): Translations {
 }
 
 export const Translations: MessageFns<Translations> = {
-  encode(message: Translations, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Translations,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.translations) {
       Translation.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -190,7 +222,8 @@ export const Translations: MessageFns<Translations> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Translations {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTranslations();
     while (reader.pos < end) {
@@ -201,7 +234,9 @@ export const Translations: MessageFns<Translations> = {
             break;
           }
 
-          message.translations.push(Translation.decode(reader, reader.uint32()));
+          message.translations.push(
+            Translation.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -229,19 +264,30 @@ export const Translations: MessageFns<Translations> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Translations>, I>>(base?: I): Translations {
+  create<I extends Exact<DeepPartial<Translations>, I>>(
+    base?: I,
+  ): Translations {
     return Translations.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Translations>, I>>(object: I): Translations {
+  fromPartial<I extends Exact<DeepPartial<Translations>, I>>(
+    object: I,
+  ): Translations {
     const message = createBaseTranslations();
-    message.translations = object.translations?.map((e) => Translation.fromPartial(e)) || [];
+    message.translations =
+      object.translations?.map((e) => Translation.fromPartial(e)) || [];
     return message;
   },
 };
 
 export interface Translate {
-  TranslateText(request: DeepPartial<Translation>, metadata?: grpc.Metadata): Promise<TranslationRecorded>;
-  GetTranslations(request: DeepPartial<Empty>, metadata?: grpc.Metadata): Promise<Translations>;
+  TranslateText(
+    request: DeepPartial<Translation>,
+    metadata?: grpc.Metadata,
+  ): Promise<TranslationRecorded>;
+  GetTranslations(
+    request: DeepPartial<Empty>,
+    metadata?: grpc.Metadata,
+  ): Promise<Translations>;
 }
 
 export class TranslateClientImpl implements Translate {
@@ -253,12 +299,26 @@ export class TranslateClientImpl implements Translate {
     this.GetTranslations = this.GetTranslations.bind(this);
   }
 
-  TranslateText(request: DeepPartial<Translation>, metadata?: grpc.Metadata): Promise<TranslationRecorded> {
-    return this.rpc.unary(TranslateTranslateTextDesc, Translation.fromPartial(request), metadata);
+  TranslateText(
+    request: DeepPartial<Translation>,
+    metadata?: grpc.Metadata,
+  ): Promise<TranslationRecorded> {
+    return this.rpc.unary(
+      TranslateTranslateTextDesc,
+      Translation.fromPartial(request),
+      metadata,
+    );
   }
 
-  GetTranslations(request: DeepPartial<Empty>, metadata?: grpc.Metadata): Promise<Translations> {
-    return this.rpc.unary(TranslateGetTranslationsDesc, Empty.fromPartial(request), metadata);
+  GetTranslations(
+    request: DeepPartial<Empty>,
+    metadata?: grpc.Metadata,
+  ): Promise<Translations> {
+    return this.rpc.unary(
+      TranslateGetTranslationsDesc,
+      Empty.fromPartial(request),
+      metadata,
+    );
   }
 }
 
@@ -310,7 +370,8 @@ export const TranslateGetTranslationsDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-interface UnaryMethodDefinitionishR extends grpc.UnaryMethodDefinition<any, any> {
+interface UnaryMethodDefinitionishR
+  extends grpc.UnaryMethodDefinition<any, any> {
   requestStream: any;
   responseStream: any;
 }
@@ -355,21 +416,31 @@ export class GrpcWebImpl {
     metadata: grpc.Metadata | undefined,
   ): Promise<any> {
     const request = { ..._request, ...methodDesc.requestType };
-    const maybeCombinedMetadata = metadata && this.options.metadata
-      ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
-      : metadata ?? this.options.metadata;
+    const maybeCombinedMetadata =
+      metadata && this.options.metadata
+        ? new BrowserHeaders({
+            ...this.options?.metadata.headersMap,
+            ...metadata?.headersMap,
+          })
+        : (metadata ?? this.options.metadata);
     return new Promise((resolve, reject) => {
       grpc.unary(methodDesc, {
         request,
         host: this.host,
         metadata: maybeCombinedMetadata ?? {},
-        ...(this.options.transport !== undefined ? { transport: this.options.transport } : {}),
+        ...(this.options.transport !== undefined
+          ? { transport: this.options.transport }
+          : {}),
         debug: this.options.debug ?? false,
         onEnd: function (response) {
           if (response.status === grpc.Code.OK) {
             resolve(response.message!.toObject());
           } else {
-            const err = new GrpcWebError(response.statusMessage, response.status, response.trailers);
+            const err = new GrpcWebError(
+              response.statusMessage,
+              response.status,
+              response.trailers,
+            );
             reject(err);
           }
         },
@@ -378,24 +449,42 @@ export class GrpcWebImpl {
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
 export class GrpcWebError extends globalThis.Error {
-  constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
+  constructor(
+    message: string,
+    public code: grpc.Code,
+    public metadata: grpc.Metadata,
+  ) {
     super(message);
   }
 }
